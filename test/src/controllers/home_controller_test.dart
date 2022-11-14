@@ -14,10 +14,19 @@ main(){
     when(() => repository.fetchWordGenerator())
     .thenAnswer((_) async => WordGeneratorModel());
 
+    expect(controller.state.value, HomeState.start);
     await controller.start();
+    expect(controller.state.value, HomeState.success);
     expect(
       controller.wordGenerator.toString(), 
       WordGeneratorModel().toString()
     );
+  });
+
+  test('must change the state to error if the request fails', () async{
+    when(() => repository.fetchWordGenerator()).thenThrow(Exception());
+    expect(controller.state.value, HomeState.start);
+    await controller.start();
+    expect(controller.state.value, HomeState.error);
   });  
 }
