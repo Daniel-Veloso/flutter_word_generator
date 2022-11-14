@@ -8,7 +8,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Word Generator'),
-      ),      
+      ),
+      body: Container(
+        child: Center(
+          child: Text('Random advice'),
+        ),
+      ),
     );
   }
 }
